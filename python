@@ -1,0 +1,12 @@
+MOV R0, #4
+MOV R1, #8
+CMP R0, R1
+BEQ equal
+BNE not
+equal:
+SUB R1, R0, #4
+STR R1, 150
+not:
+ADD R1, R0, R1
+STR R1, 150
+HALT

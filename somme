@@ -1,0 +1,10 @@
+MOV R0, #0
+MOV R1, #0
+B somme
+somme:
+ADD R1, R1, #1
+ADD R0, R0, R1
+CMP R1, #10
+BNE somme
+STR R0, 100
+HALT
