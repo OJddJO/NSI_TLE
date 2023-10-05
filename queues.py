@@ -1,6 +1,7 @@
 class Queue:
     """Queue represent a queue data structure of n element, where n is the size of the queue.
-    
+    Note that the queue is initialized with None.
+
     Elements are added to the rear of the queue and removed from the front of the queue.
     The queue is empty when the front and rear are the same.
     
