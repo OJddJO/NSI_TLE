@@ -14,7 +14,7 @@ class Pile:
     1
     >>> print(myPile)
     [1, None, None, None, None]"""
-    def __init__(self, size: int) -> None:
+    def __init__(self, size: int):
         self._size = size
         self._pile = [None] * size
         self._top = 0
@@ -24,7 +24,7 @@ class Pile:
         return self._top == 0
 
     def add(self, element) -> object:
-        """Adds an element to the top of the pile."""
+        """Adds an element to the top of the pile. Returns the element added."""
         if self._top == self._size:
             raise IndexError("Pile is full.")
         else:
@@ -33,7 +33,7 @@ class Pile:
             return element
 
     def remove(self) -> object:
-        """Removes the top element from the pile."""
+        """Removes the top element from the pile. Returns the element removed."""
         if self.emptyPile():
             raise IndexError("Pile is empty.")
         else:
