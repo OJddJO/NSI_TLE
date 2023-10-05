@@ -37,7 +37,7 @@ class Queue:
         return self._start == self._size
     
     def add(self, element) -> object:
-        """Adds an element to the rear of the queue."""
+        """Adds an element to the rear of the queue. Returns the element added."""
         if self.fullQueue():
             raise IndexError("Queue is full.")
         else:
@@ -46,7 +46,7 @@ class Queue:
             return element
 
     def remove(self) -> object:
-        """Removes the front element from the queue."""
+        """Removes the front element from the queue. Returns the element removed."""
         if self.emptyQueue():
             raise IndexError("Queue is empty.")
         else:
