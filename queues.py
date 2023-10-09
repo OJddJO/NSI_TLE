@@ -23,27 +23,27 @@ class Queue:
     [1, 2, None, None, None] # Note that the first element is still 1
     >>> print(myQueue.getQueue())
     [2]"""
-    def __init__(self, size: int):
+    def __init__(self, size: int, front = 0, rear = 0):
         self._size = size
         self._queue = [None] * size
-        self._start = 0
-        self._end = 0
+        self._front = front
+        self._rear = rear
     
     def emptyQueue(self) -> bool:
         """Returns True if the queue is empty."""
-        return self._start == self._end
+        return self._front == self._rear
     
     def fullQueue(self) -> bool:
         """Returns True if the queue is full."""
-        return self._start == self._size
+        return self._front == self._size
     
     def add(self, element) -> object:
         """Adds an element to the rear of the queue. Returns the element added."""
         if self.fullQueue():
             raise IndexError("Queue is full.")
         else:
-            self._queue[self._end] = element
-            self._end += 1
+            self._queue[self._rear] = element
+            self._rear += 1
             return element
 
     def remove(self) -> object:
@@ -51,13 +51,13 @@ class Queue:
         if self.emptyQueue():
             raise IndexError("Queue is empty.")
         else:
-            element = self._queue[self._start]
-            self._start += 1
+            element = self._queue[self._front]
+            self._front += 1
             return element
         
     def getQueue(self) -> list:
         """Returns the queue."""
-        return self._queue[self._start:self._end]
+        return self._queue[self._front:self._rear]
         
     def __str__(self) -> str:
         """Returns a string representation of the queue."""
@@ -69,22 +69,22 @@ class Queue:
     
     def __iter__(self) -> object:
         """Returns an iterator for the queue."""
-        return _QueueIterator(self._queue, self._start, self._end)
+        return _QueueIterator(self._queue, self._front, self._rear)
 
 
 class _QueueIterator:
     """An iterator for the queue."""
-    def __init__(self, queue, start, end):
-        self._start = start
-        self._end = end
-        self._queue = queue[self._start:self._end]
+    def __init__(self, queue, front, rear):
+        self._front = front
+        self._rear = rear
+        self._queue = queue[self._front:self._rear]
         self._index = 0
     
     def __iter__(self):
         return self
     
     def __next__(self):
-        if self._index < self._end - self._start:
+        if self._index < self._rear - self._front:
             element = self._queue[self._index]
             self._index += 1
             return element

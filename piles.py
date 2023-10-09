@@ -38,8 +38,9 @@ class Pile:
             raise IndexError("Pile is empty.")
         else:
             self._top -= 1
+            element = self._pile[self._top]
             self._pile[self._top] = None
-            return self._pile[self._top]
+            return element
 
     def __str__(self) -> str:
         """Returns a string representation of the pile."""
@@ -91,3 +92,4 @@ if __name__ == '__main__':
     pile.add(5)
     print(pile)
     print(pile.remove())
+    print(pile)
