@@ -90,3 +90,23 @@ class File:
             self.file[0] = self.tete
             self.file[2] = self.taille
             return e
+        
+    def __str__(self):
+        return str(self.file)
+
+
+if __name__ == "__main__":
+    file = File(3, 3, 5)
+    print(file)
+    print(file.fileVide())
+    print(file.filePleine())
+    file.enfiler(1)
+    file.enfiler(2)
+    file.enfiler(3)
+    file.enfiler(4)
+    file.enfiler(5)
+    print(file)
+    print(file.defiler())
+    print(file)
+    print(file.defiler())
+    print(file)
