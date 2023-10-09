@@ -47,3 +47,46 @@ if __name__ == "__main__":
     print(pile.pile[0])
     print(pile)
 
+
+class File:
+    """Une file est définie par sa tete, sa queue et son nombre d'éléments"""
+    def __init__(self, tete, queue, nb_elements):
+        self.tete, self.queue = tete, queue
+        self.taille = 0
+        self.file = [self.tete, self.queue, self.taille] + [0] * nb_elements
+
+    def fileVide(self) -> bool:
+        return self.taille == 0
+    
+    def filePleine(self) -> bool:
+        return self.taille == len(self.file) - 3
+
+    def enfiler(self, e):
+        if self.filePleine():
+            return False
+        else:
+            self.file[self.queue] = e
+        if self.queue == len(self.file) - 1:
+            self.queue = 3
+        else:
+            self.queue += 1
+            self.taille += 1
+        self.file[1] = self.queue
+        self.file[2] = self.taille
+        return True
+    
+    def defiler(self):
+        self.taille = self.file[2]
+        self.tete = self.file[0]
+        if self.taille == 0:
+            return 'File vide'
+        else:
+            e = self.file[self.tete]
+            if self.tete == len(self.file) - 1:
+                self.tete = 3
+            else:
+                self.tete += 1
+            self.taille -= 1
+            self.file[0] = self.tete
+            self.file[2] = self.taille
+            return e

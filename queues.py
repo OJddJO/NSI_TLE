@@ -20,10 +20,11 @@ class Queue:
     >>> myQueue.remove()
     1
     >>> print(myQueue)
-    [1, 2, None, None, None] # Note that the first element is still 1
+    [None, 2, None, None, None]
     >>> print(myQueue.getQueue())
     [2]"""
     def __init__(self, size: int, front = 0, rear = 0):
+        """Initializes the queue with number of elements, front and rear."""
         self._size = size
         self._queue = [None] * size
         self._front = front
@@ -52,6 +53,7 @@ class Queue:
             raise IndexError("Queue is empty.")
         else:
             element = self._queue[self._front]
+            self._queue[self._front] = None
             self._front += 1
             return element
         
