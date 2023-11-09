@@ -68,7 +68,7 @@ class BinaryTree:
         if self.rightSubTree != None:
             infixe += self.rightSubTree.infixe()
         return infixe
-    
+
     def postfixe(self):
         """Returns a list of the keys of the tree in postfixe order."""
         postfixe = []
@@ -78,6 +78,51 @@ class BinaryTree:
             postfixe += self.rightSubTree.postfixe()
         postfixe.append(self.root.key)
         return postfixe
+
+    def __dict__(self):
+        """Returns a dictionary representation of the tree."""
+        d = {}
+        d[self.root.key] = {"left": None, "right": None}
+        if self.leftSubTree != None:
+            d[self.root.key]["left"] = self.leftSubTree.__dict__()
+        if self.rightSubTree != None:
+            d[self.root.key]["right"] = self.rightSubTree.__dict__()
+        return d
+
+
+class SearchBinaryTree(BinaryTree):
+    """A search binary tree."""
+    def __init__(self, key=None):
+        """Constructor for a search binary tree, takes a key as parameter."""
+        super().__init__(key)
+
+    def searchKey(self, key):
+        """Returns True if the key is in the tree, False otherwise."""
+        if self.root.key == key:
+            return True
+        elif self.root.key > key:
+            if self.leftSubTree != None:
+                return self.leftSubTree.searchKey(key)
+            else:
+                return False
+        else:
+            if self.rightSubTree != None:
+                return self.rightSubTree.searchKey(key)
+            else:
+                return False
+
+    def insertKey(self, key):
+        """Inserts a key in the tree."""
+        if self.root.key > key:
+            if self.leftSubTree != None:
+                self.leftSubTree.insertKey(key)
+            else:
+                self.leftSubTree = SearchBinaryTree(key)
+        else:
+            if self.rightSubTree != None:
+                self.rightSubTree.insertKey(key)
+            else:
+                self.rightSubTree = SearchBinaryTree(key)
 
 
 if __name__ == "__main__":
@@ -91,6 +136,7 @@ if __name__ == "__main__":
     tree.rightSubTree.rightSubTree.rightSubTree = BinaryTree(8)
     tree.rightSubTree.rightSubTree.rightSubTree.leftSubTree = BinaryTree(33)
 
+    print("Tree: ", tree.__dict__())
     print("Tree size:", tree.size())
     print("Tree height:", tree.height())
     print("Tree distance max:", tree.distanceMax())
@@ -98,3 +144,22 @@ if __name__ == "__main__":
     print("Tree in prefixe order:", tree.prefixe())
     print("Tree in infixe order:", tree.infixe())
     print("Tree in postfixe order:", tree.postfixe())
+
+    #test for search binary tree
+    key_list = [2, 91, 30, 1, 2, 66, 8, 33]
+    tree1 = SearchBinaryTree(45)
+    for key in key_list:
+        tree1.insertKey(key)
+    
+    print("Tree1: ", tree1.__dict__())
+    print("Tree1 size:", tree1.size())
+    print("Tree1 height:", tree1.height())
+    print("Tree1 distance max:", tree1.distanceMax())
+    print("Tree1 in breadth-first order:", tree1.breadthFirst())    
+    print("Tree1 in prefixe order:", tree1.prefixe())
+    print("Tree1 in infixe order:", tree1.infixe())
+    print("Tree1 in postfixe order:", tree1.postfixe())
+    print("Tree1 search key 8:", tree1.searchKey(8))
+    print("Tree1 search key 100:", tree1.searchKey(100))
+    print("Tree1 search key 2:", tree1.searchKey(2))
+    print("Tree1 search key 45:", tree1.searchKey(45))
