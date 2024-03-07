@@ -10,7 +10,7 @@ def recherche(tab: list[int]) -> list[tuple[int, int]]:
 def recherche1(tab):
 	print([(tab[i], tab[i+1]) for i in range(len(tab)-1) if tab[i]+1 == tab[i+1]])
 
-def propager(M, i, j, val):
+def propager(M: list[list[int]], i: int, j: int, val: int) -> None:
 	if M[i][j] == 0:
 		return
 	M[i][j] = val
