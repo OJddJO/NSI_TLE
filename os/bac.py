@@ -12,6 +12,8 @@ def recherche1(tab):
 
 
 def propager(M: list[list[int]], i: int, j: int, val: int) -> None:
+	"""La fonction propager prend en entrée une matrice de nombre entier, un entier i, un entier j et un entier val et 
+	modifie la matrice M en propageant la valeur val à partir de la case en i, j si et seulement si ses voisins sont des 1"""
 	if M[i][j] == 0:
 		return
 	M[i][j] = val
