@@ -12,7 +12,6 @@ def cypher(key:int, file:str) -> str:
     open("cyphered.txt", "w").write(cyphered)
     return message, cyphered
 
-
 def decypher(key:int, file:str) -> str:
     message = list(open(file, "r").read().lower())
     decyphered = ""
